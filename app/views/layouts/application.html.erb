@@ -42,17 +42,17 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="nav navbar-nav">
+            
+            <% if user_signed_in? %>
+            <div class="navbar-text">
+              Signed in as <%= current_user.email %> &middot;
+            </div>
+            <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn-outline-danger ml-i" %>
+            <% end %>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <a class="nav-link active" aria-current="page" href="/">Home</a>
             </li>
-            <!-- <div class="navbar-right"> -->
-              <% if user_signed_in? %>
-                <div class="navbar-text">
-                  Signed in as <%= current_user.email %> &middot;
-                </div>
-                <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn-outline-danger ml-i" %>
-              <% end %>
-            <!-- </div> -->
+            
             <% unless user_signed_in? %>
               <li class="<%= "active" if current_page?("/users/sign_up") %>">
                 <%= link_to "Sign up", new_user_registration_path, class: "nav-link" %>
